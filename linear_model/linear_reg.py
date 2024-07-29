@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import random
 from typing import Union, Callable
-from sklearn.datasets import make_regression
 
 
 class MyLineReg:
@@ -118,15 +117,3 @@ class MyLineReg:
 
     def get_best_score(self):
         return self.score
-
-
-# Example usage
-X, y = make_regression(n_samples=1000, n_features=14, n_informative=10, noise=15, random_state=42)
-X = pd.DataFrame(X)
-y = pd.Series(y)
-X.columns = [f'col_{col}' for col in X.columns]
-
-reg = MyLineReg(n_iter=50, learning_rate=0.1, metric='mape', sgd_sample=0.1)
-reg.fit(X, y, verbose=10)
-print(np.mean(reg.get_coef()))
-print(reg.get_best_score())
